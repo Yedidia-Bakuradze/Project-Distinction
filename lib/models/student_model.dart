@@ -1,3 +1,7 @@
+import 'package:uuid/uuid.dart';
+
+var uuid = const Uuid();
+
 class Student {
   Student({
     required this.username,
@@ -6,8 +10,9 @@ class Student {
     required this.lastName,
     required this.emailAddress,
     required this.schoolName,
-  });
+  }) : studentId = uuid.v1(); // Time baed generated random id
 
+  String studentId;
   String username;
   String password;
 
