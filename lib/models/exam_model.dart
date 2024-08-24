@@ -1,9 +1,11 @@
+import 'package:uuid/uuid.dart';
+
 class Exam {
   Exam({
     required this.title,
-    required this.examId,
-  });
+  }) : examId = const Uuid().v1();
 
   String title;
   String examId;
+  DateTime? examDate;
 }

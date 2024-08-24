@@ -1,10 +1,12 @@
+import 'package:uuid/uuid.dart';
+
 class Task {
   Task({
-    required this.taskId,
     required this.title,
     DateTime? personalDueTime_,
     required this.isPubliclyAvailable,
-  }) : isCompleted = false;
+  })  : isCompleted = false,
+        taskId = const Uuid().v1();
 
   String taskId; //UUID Init
   String title;
