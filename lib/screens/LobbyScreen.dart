@@ -23,8 +23,8 @@ class LobbyScreen extends StatelessWidget {
             //---- Signup button ----
             ElevatedButton(
               onPressed: () {
-                Navigator.of(context).push(
-                    MaterialPageRoute(builder: (ctx) => const SignupScreen()));
+                Navigator.of(context)
+                    .push(MaterialPageRoute(builder: (ctx) => SignupScreen()));
               },
               style: ElevatedButton.styleFrom(
                 fixedSize: const Size(220, 60),
