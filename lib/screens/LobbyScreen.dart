@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:project_distinction/screens/SignupScreen.dart';
 
 class LobbyScreen extends StatelessWidget {
   const LobbyScreen({super.key});
@@ -21,7 +22,10 @@ class LobbyScreen extends StatelessWidget {
 
             //---- Signup button ----
             ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.of(context).push(
+                    MaterialPageRoute(builder: (ctx) => const SignupScreen()));
+              },
               style: ElevatedButton.styleFrom(
                 fixedSize: const Size(220, 60),
                 shape: RoundedRectangleBorder(
