@@ -59,3 +59,8 @@ List<Student> students = [
     username: "su7",
   ),
 ];
+
+//Returns a boolean value if there is a user with that username
+bool ifAny(String _username) {
+  return students.any((user) => user.username == _username);
+}

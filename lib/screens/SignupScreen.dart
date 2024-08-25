@@ -17,18 +17,19 @@ class SignupScreen extends StatelessWidget {
   void _onSignup() {
     // Validate the credentials using the validator
     final status = _formKey.currentState!.validate();
-    if (status) {
+    if (!status) {
       return;
     }
 
     //Create a new Student object
     final _newStudent = Student(
-        username: _username,
-        password: _password,
-        firstName: _firstName,
-        lastName: _lastName,
-        emailAddress: _emailAddress,
-        schoolName: _schoolName);
+      username: _username,
+      password: _password,
+      firstName: _firstName,
+      lastName: _lastName,
+      emailAddress: _emailAddress,
+      schoolName: _schoolName,
+    );
 
     //Move to the dashboard by passing the id to the next screen
     print("New Studnet");
