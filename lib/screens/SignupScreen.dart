@@ -15,6 +15,7 @@ class SignupScreen extends StatelessWidget {
 
   //Create a new global key for the card
   final _formKey = GlobalKey<FormState>();
+
   //--- The signup logic ---
   void _onSignup(ctx) {
     // Validate the credentials using the validator
@@ -22,7 +23,10 @@ class SignupScreen extends StatelessWidget {
     if (!status) {
       return;
     }
+
+    //Saving all the inserted data
     _formKey.currentState!.save();
+
     //Create a new Student object
     final _newStudent = Student(
       username: _username,
@@ -38,6 +42,7 @@ class SignupScreen extends StatelessWidget {
     //Move to the dashboard by passing the id to the next screen
     print("New Studnet");
 
+    //Navigation to the home screen
     Navigator.of(ctx).push(
       MaterialPageRoute(
         builder: (ctx) => HomeScreen(currentId: _newStudent.studentId),
