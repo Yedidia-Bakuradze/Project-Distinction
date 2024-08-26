@@ -36,11 +36,12 @@ class _HomeScreenState extends State<HomeScreen> {
         children: [
           ElevatedButton(
             onPressed: () {},
-            child: const Text("Todo"),
             style: ElevatedButton.styleFrom(
-                shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(5),
-            )),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(5),
+              ),
+            ),
+            child: const Text("Todo"),
           ),
         ],
       ),
