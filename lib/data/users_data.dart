@@ -64,3 +64,15 @@ List<Student> students = [
 bool ifAny(String _username) {
   return students.any((user) => user.username == _username);
 }
+
+Student findStudentById(String _id) {
+  print("Id: ${_id}");
+  final res = students.firstWhere((user) => user.studentId == _id);
+  return res;
+}
+
+void addStudentToDb(Student _student) {
+  print(_student);
+  print(_student.firstName);
+  students.add(_student);
+}

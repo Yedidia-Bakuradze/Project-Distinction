@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:project_distinction/data/users_data.dart';
 import 'package:project_distinction/models/student_model.dart';
+import 'package:project_distinction/screens/HomeScreen.dart';
 
 class SignupScreen extends StatelessWidget {
   var _firstName = "";
@@ -14,13 +16,13 @@ class SignupScreen extends StatelessWidget {
   //Create a new global key for the card
   final _formKey = GlobalKey<FormState>();
   //--- The signup logic ---
-  void _onSignup() {
+  void _onSignup(ctx) {
     // Validate the credentials using the validator
     final status = _formKey.currentState!.validate();
     if (!status) {
       return;
     }
-
+    _formKey.currentState!.save();
     //Create a new Student object
     final _newStudent = Student(
       username: _username,
@@ -31,8 +33,16 @@ class SignupScreen extends StatelessWidget {
       schoolName: _schoolName,
     );
 
+    addStudentToDb(_newStudent);
+
     //Move to the dashboard by passing the id to the next screen
     print("New Studnet");
+
+    Navigator.of(ctx).push(
+      MaterialPageRoute(
+        builder: (ctx) => HomeScreen(currentId: _newStudent.studentId),
+      ),
+    );
   }
 
   Widget build(BuildContext context) {
@@ -140,7 +150,9 @@ class SignupScreen extends StatelessWidget {
                       if (value == null || value.trim().isEmpty) {
                         return "The field cann't be empty";
                       }
-                      //TODO: Check if the username already exists in the database
+                      if (ifAny(value)) {
+                        return "The username is already in our system";
+                      }
                       if (value.trim().length < 6) {
                         return "The username must be at least 6 charaters long";
                       }
@@ -179,7 +191,7 @@ class SignupScreen extends StatelessWidget {
 
                   //Submit button:
                   ElevatedButton(
-                    onPressed: _onSignup,
+                    onPressed: () => _onSignup(context),
                     child: const Text("Join Now!"),
                   )
                 ],
