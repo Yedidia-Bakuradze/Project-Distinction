@@ -1,13 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:project_distinction/screens/CourseScreen.dart';
 
 class GridItem extends StatelessWidget {
-  GridItem({super.key, required this.title, required this.courseId});
+  GridItem({
+    super.key,
+    required this.title,
+    required this.courseId,
+  });
+
   var title = '';
   var courseId = '';
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {},
+      onTap: () {
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (ctx) => CourseScreen(),
+          ),
+        );
+      },
       splashColor: Colors.black12,
       borderRadius: BorderRadius.circular(16),
       child: Container(
