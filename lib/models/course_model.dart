@@ -13,7 +13,7 @@ class Course {
   }) : courseId = const Uuid().v1();
 
   String title;
-  int credits;
+  double credits;
   double totalHourCount;
   String courseId;
 
