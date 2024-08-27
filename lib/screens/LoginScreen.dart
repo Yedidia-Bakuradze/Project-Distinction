@@ -8,6 +8,7 @@ class LoginScreen extends StatelessWidget {
   var _username = '';
   var _password = '';
 
+  //Handles the login process if invoked.
   void _onLogin(context) {
     //Validate the input fields as fields
     final status = _formKey.currentState!.validate();
