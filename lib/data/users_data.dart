@@ -3,12 +3,12 @@ import 'package:project_distinction/models/student_model.dart';
 
 List<Student> students = [
   Student(
-    emailAddress: "s1@gmail.com",
-    firstName: "Firstname 1",
-    lastName: "Lastname 1",
+    emailAddress: "yedidia@gmail.com",
+    firstName: "Yedidia",
+    lastName: "Bakuradze",
     password: "123456",
     schoolName: "JCT",
-    username: "su1",
+    username: "yedidia",
   ),
   Student(
     emailAddress: "s2@gmail.com",
@@ -71,8 +71,29 @@ Student findStudentById(String _id) {
   return res;
 }
 
+Student getUserByUsernameAndPassword(String _username, String _password) {
+  return students.firstWhere((user) => ((user.emailAddress == _username) ||
+      (user.username == _username) && user.password == _password));
+}
+
 void addStudentToDb(Student _student) {
   print(_student);
   print(_student.firstName);
   students.add(_student);
+}
+
+bool isUserExists(String _username) {
+  return students.any(
+      (user) => user.username == _username || user.emailAddress == _username);
+}
+
+bool verifyUserCredetials(String _username, String _password) {
+  for (final student in students) {
+    if (student.username == _username || student.emailAddress == _username) {
+      if (student.password == _password) {
+        return true;
+      }
+    }
+  }
+  return false;
 }
