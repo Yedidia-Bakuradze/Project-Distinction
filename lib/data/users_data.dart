@@ -1,4 +1,5 @@
 // ignore: constant_identifier_names
+import 'package:project_distinction/models/course_model.dart';
 import 'package:project_distinction/models/student_model.dart';
 
 List<Student> students = [
@@ -9,6 +10,28 @@ List<Student> students = [
     password: "123456",
     schoolName: "JCT",
     username: "yedidia",
+    courses: [
+      Course(
+        title: "Calculus II",
+        credits: 5,
+        totalHourCount: 55,
+        examWeight: 80,
+        quizWeight: 10,
+        assignmentWeight: 10,
+        numOfCalculatedQuizzes: 1,
+        numOfCalculatedAssignment: 10,
+      ),
+      Course(
+        title: "Linear Algebra II",
+        credits: 2.5,
+        totalHourCount: 40,
+        examWeight: 90,
+        quizWeight: 5,
+        assignmentWeight: 5,
+        numOfCalculatedQuizzes: 2,
+        numOfCalculatedAssignment: 8,
+      )
+    ],
   ),
   Student(
     emailAddress: "s2@gmail.com",
