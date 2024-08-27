@@ -55,15 +55,6 @@ class _HomeScreenState extends State<HomeScreen> {
             icon: Icon(Icons.map),
           ),
         ],
-        selectedLabelStyle: const TextStyle(
-          color: Colors.purple,
-          fontWeight: FontWeight.bold,
-          decorationThickness: 2, // Thickness of the underline
-          decorationColor: Colors.purple, // Color of the underline
-        ),
-        unselectedLabelStyle: const TextStyle(
-          color: Colors.grey,
-        ),
         selectedItemColor: Colors.purple,
         unselectedItemColor: Colors.grey,
       ),
