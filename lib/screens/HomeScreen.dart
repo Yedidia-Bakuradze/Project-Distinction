@@ -20,8 +20,12 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
-    _student = findStudentById(widget.currentId);
-    _listOfCourses = _student.listOfCourses;
+    setState(() {
+      _student = findStudentById(widget.currentId);
+    });
+    setState(() {
+      _listOfCourses = _student.listOfCourses;
+    });
   }
 
   int _selectedIndex = 0;
@@ -42,14 +46,17 @@ class _HomeScreenState extends State<HomeScreen> {
         currentIndex: _selectedIndex,
         onTap: _onItemTapped,
         items: const [
+          // --- Personal ---
           BottomNavigationBarItem(
             label: "Personl",
             icon: Icon(Icons.person),
           ),
+          // --- Classes ---
           BottomNavigationBarItem(
             label: "Classes",
             icon: Icon(Icons.class_),
           ),
+          // --- Course Maps ---
           BottomNavigationBarItem(
             label: "Course Map",
             icon: Icon(Icons.map),
@@ -67,6 +74,8 @@ class _HomeScreenState extends State<HomeScreen> {
             crossAxisSpacing: 20,
             mainAxisSpacing: 20,
           ),
+
+          // --- Generating the course that user has been taken ---
           children: [
             for (var course in _listOfCourses)
               GridItem(
