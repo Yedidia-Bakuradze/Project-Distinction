@@ -1,10 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:project_distinction/widgets/CourseTaskWidget.dart';
 
 class CourseScreen extends StatelessWidget {
   CourseScreen({super.key});
+
+  void _onAddAction() {}
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        child: const Icon(Icons.add),
+        onPressed: _onAddAction,
+      ),
       body: CustomScrollView(
         slivers: [
           SliverAppBar(
@@ -35,18 +42,7 @@ class CourseScreen extends StatelessWidget {
           //The list items that are loaded under the image
           SliverList(
             delegate: SliverChildBuilderDelegate(
-              (BuildContext context, int index) {
-                return ListTile(
-                  leading: Icon(Icons.check_circle, color: Colors.green),
-                  title: Text('Assignment ${index + 1}'),
-                  subtitle: Text('3/6 Completed'),
-                  trailing: IconButton(
-                      onPressed: () {
-                        print("pressed");
-                      },
-                      icon: const Icon(Icons.chevron_right)),
-                );
-              },
+              (ctx, index) => CourseTaskWidget(),
               childCount: 20, // Number of assignments
             ),
           ),
