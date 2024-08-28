@@ -8,50 +8,31 @@ class CourseScreen extends StatelessWidget {
       body: CustomScrollView(
         slivers: [
           SliverAppBar(
-            expandedHeight: 200.0,
+            expandedHeight: 250.0,
             floating: false,
             pinned: true,
             centerTitle: true,
             toolbarHeight:
-                100.0, // Increased height for the header when scrolled
+                150.0, // Increased height for the header when scrolled
+            backgroundColor: Colors.amber,
             flexibleSpace: FlexibleSpaceBar(
-              title: const Column(
-                mainAxisAlignment: MainAxisAlignment.end,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    children: [
-                      Text("Calculus II"),
-                      Text("Patron"),
-                    ],
-                  )
-                ],
+              title: const Text(
+                "This is the floating widget",
+                style: TextStyle(
+                  color: Colors.white,
+                ),
               ),
               background:
                   Image.asset('assets/images/math.jpg', fit: BoxFit.cover),
-              titlePadding: const EdgeInsets.only(left: 16, bottom: 16),
             ),
           ),
+
           const SliverToBoxAdapter(
-            child: Padding(
-              padding: EdgeInsets.all(16.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Text(
-                    'The bombing heart of the mathematical field',
-                    style: TextStyle(fontSize: 16),
-                  ),
-                  SizedBox(height: 8),
-                  Text('By: Yehoshua Koch'),
-                  SizedBox(height: 8),
-                  Text('5 Points'),
-                  Text('8/9 Completed'),
-                  Text('Avg: 93'),
-                ],
-              ),
+            child: SizedBox(
+              height: 30,
             ),
           ),
+          //The list items that are loaded under the image
           SliverList(
             delegate: SliverChildBuilderDelegate(
               (BuildContext context, int index) {
@@ -59,7 +40,11 @@ class CourseScreen extends StatelessWidget {
                   leading: Icon(Icons.check_circle, color: Colors.green),
                   title: Text('Assignment ${index + 1}'),
                   subtitle: Text('3/6 Completed'),
-                  trailing: Icon(Icons.chevron_right),
+                  trailing: IconButton(
+                      onPressed: () {
+                        print("pressed");
+                      },
+                      icon: const Icon(Icons.chevron_right)),
                 );
               },
               childCount: 20, // Number of assignments
