@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:project_distinction/data/users_data.dart';
+import 'package:project_distinction/controller/user_controller.dart';
 import 'package:project_distinction/screens/HomeScreen.dart';
 
 class LoginScreen extends StatelessWidget {
   LoginScreen({super.key});
-  var _formKey = GlobalKey<FormState>();
+  final _formKey = GlobalKey<FormState>();
   var _username = '';
   var _password = '';
 
@@ -20,8 +20,12 @@ class LoginScreen extends StatelessWidget {
     if (!verifyUserCredetials(_username, _password)) {
       if (isUserExists(_username)) {
         //TODO: Invoke a message that says "The password isn't correct"
+        ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text("The password isn't correct")));
       } else {
         //TODO: Invoke a message that says "The user isn't registered in our system"
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+            content: Text("The user isn't registered in our system")));
       }
       return;
     }

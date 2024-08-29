@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:project_distinction/data/users_data.dart';
+import 'package:project_distinction/controller/user_controller.dart';
 import 'package:project_distinction/models/student_model.dart';
 import 'package:project_distinction/screens/HomeScreen.dart';
 
@@ -50,6 +50,7 @@ class SignupScreen extends StatelessWidget {
     );
   }
 
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -155,7 +156,7 @@ class SignupScreen extends StatelessWidget {
                       if (value == null || value.trim().isEmpty) {
                         return "The field cann't be empty";
                       }
-                      if (ifAny(value)) {
+                      if (isUserExists(value)) {
                         return "The username is already in our system";
                       }
                       if (value.trim().length < 6) {

@@ -6,8 +6,10 @@ class GridItem extends StatelessWidget {
     super.key,
     required this.title,
     required this.courseId,
+    required this.currentUserId,
   });
 
+  final String currentUserId;
   var title = '';
   var courseId = '';
   @override
@@ -16,7 +18,9 @@ class GridItem extends StatelessWidget {
       onTap: () {
         Navigator.of(context).push(
           MaterialPageRoute(
-            builder: (ctx) => CourseScreen(),
+            builder: (ctx) => CourseScreen(
+              currentUserId: currentUserId,
+            ),
           ),
         );
       },
@@ -26,7 +30,7 @@ class GridItem extends StatelessWidget {
         padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(16),
-          gradient: LinearGradient(
+          gradient: const LinearGradient(
             colors: [
               Colors.purple,
               Colors.deepPurple,

@@ -1,12 +1,15 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:project_distinction/data/users_data.dart';
+import 'package:project_distinction/controller/user_controller.dart';
 import 'package:project_distinction/models/course_model.dart';
+import 'package:project_distinction/models/major_model.dart';
 import 'package:project_distinction/models/student_model.dart';
 import 'package:project_distinction/widgets/GridItem.dart';
 
 class HomeScreen extends StatefulWidget {
-  HomeScreen({super.key, required this.currentId});
+  const HomeScreen({
+    super.key,
+    required this.currentId,
+  });
 
   final String currentId;
   @override
@@ -15,20 +18,20 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   late Student _student;
-  List<Course> _listOfCourses = [];
+  late Major _major;
+  late List<Course> _totalListOfCourses;
+  int _selectedIndex = 0;
 
   @override
   void initState() {
     super.initState();
-    setState(() {
-      _student = findStudentById(widget.currentId);
-    });
-    setState(() {
-      _listOfCourses = _student.listOfCourses;
-    });
+    _student = findStudentById(widget.currentId);
+    _major = _student.listOfMajors[0];
+    _totalListOfCourses = [
+      ..._major.optionalCourses,
+      ..._major.requiredCourses
+    ];
   }
-
-  int _selectedIndex = 0;
 
   void _onItemTapped(int index) {
     setState(() {
@@ -77,8 +80,9 @@ class _HomeScreenState extends State<HomeScreen> {
 
           // --- Generating the course that user has been taken ---
           children: [
-            for (var course in _listOfCourses)
+            for (var course in _totalListOfCourses)
               GridItem(
+                currentUserId: _student.studentId,
                 courseId: course.courseId,
                 title: course.title,
               ),
