@@ -8,8 +8,8 @@ import 'package:project_distinction/models/task_model.dart';
 
 List<Student> students = [
   Student(
-    username: 'john_doe',
-    password: 'password123',
+    username: '1',
+    password: '1',
     firstName: 'John',
     lastName: 'Doe',
     emailAddress: 'john.doe@example.com',

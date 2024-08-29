@@ -15,17 +15,22 @@ class GridItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
+      //Navigation to a new page
       onTap: () {
         Navigator.of(context).push(
           MaterialPageRoute(
             builder: (ctx) => CourseScreen(
-              currentUserId: currentUserId,
+              userId: currentUserId,
+              courseId: courseId,
             ),
           ),
         );
       },
+
+      //The background color
       splashColor: Colors.black12,
       borderRadius: BorderRadius.circular(16),
+
       child: Container(
         padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
