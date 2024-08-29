@@ -13,11 +13,12 @@ class Major {
     required this.requiredCourses,
     required this.optionalCourses,
     required this.color,
+    required this.imageUrl,
   }) : majorid = const Uuid().v1();
 
   String majorid;
   String title;
-  String imageUrl = "";
+  String imageUrl;
   double requiredCredits;
   String type;
   String majorId;
