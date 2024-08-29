@@ -10,6 +10,11 @@ class Student {
     required this.lastName,
     required this.emailAddress,
     required this.schoolName,
+    this.color = Colors.black,
+    this.credits = 0,
+    this.imageUrl = "",
+    this.listOfMajors = const [],
+    this.points = 0,
   }) : studentId = const Uuid().v1();
 
   String studentId;
@@ -26,5 +31,5 @@ class Student {
   int points = 0;
   double credits = 0.0;
   Color color = Colors.deepPurpleAccent;
-  List<Major> listOfMajors = [];
+  List<Major> listOfMajors;
 }
