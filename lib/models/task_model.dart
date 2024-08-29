@@ -3,19 +3,22 @@ import 'package:uuid/uuid.dart';
 class Task {
   Task({
     required this.title,
-    DateTime? personalDueTime_,
-    required this.isPubliclyAvailable,
-  })  : isCompleted = false,
-        taskId = const Uuid().v1();
+    required this.dueDate,
+    required this.personalStarttDate,
+    required this.personalDuetDate,
+    required this.submittedDocUrl,
+    required this.isCompleted,
+    required this.publicAccess,
+  }) : taskId = const Uuid().v1();
 
-  String taskId; //UUID Init
   String title;
-  DateTime? recommendedStartDate;
   DateTime? dueDate;
+  DateTime? personalStarttDate;
+  DateTime? personalDuetDate;
+  String taskId;
+  String submittedDocUrl;
+  bool isCompleted = false;
+  bool publicAccess = false;
 
-  //The personal zone
-  bool isCompleted;
-  String? submittedDoc;
-  DateTime? personalDueTime;
-  bool isPubliclyAvailable;
+  List<Task> subTasks = [];
 }
