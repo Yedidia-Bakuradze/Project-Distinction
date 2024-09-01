@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:project_distinction/controller/user_controller.dart';
 import 'package:project_distinction/models/course_model.dart';
 import 'package:project_distinction/models/student_model.dart';
-import 'package:project_distinction/screens/TaskScreen.dart';
-import 'package:project_distinction/widgets/TaskWidget.dart';
 
 class CourseScreen extends StatefulWidget {
   CourseScreen({
@@ -19,10 +17,9 @@ class CourseScreen extends StatefulWidget {
 }
 
 class _CourseScreenState extends State<CourseScreen> {
-  void _onAddAction() {}
-
   late final Course _course;
   late final Student _student;
+  void _onAddAction() {}
 
   @override
   void initState() {
@@ -33,6 +30,8 @@ class _CourseScreenState extends State<CourseScreen> {
 
   @override
   Widget build(BuildContext context) {
+    print(_course.courseId);
+    print(_course.courseId);
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         onPressed: _onAddAction,
@@ -46,7 +45,7 @@ class _CourseScreenState extends State<CourseScreen> {
             pinned: true,
             centerTitle: true,
             toolbarHeight:
-                150.0, // Increased height for the header when scrolled
+                80.0, // Increased height for the header when scrolled
             backgroundColor: _course.color,
             flexibleSpace: FlexibleSpaceBar(
               title: Text(
@@ -71,12 +70,8 @@ class _CourseScreenState extends State<CourseScreen> {
             padding: const EdgeInsets.all(5),
             sliver: SliverList(
               delegate: SliverChildBuilderDelegate(
-                (ctx, index) => TaskWidget(
-                  cid: _course.courseId,
-                  uid: _student.studentId,
-                  isCompleted: _course.tasks[index].isCompleted,
-                  tid: _course.tasks[index].taskId,
-                ),
+                (ctx, index) => Text("Task Numebr ${index}"),
+
                 childCount: _course.tasks.length, // Number of assignments
               ),
             ),

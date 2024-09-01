@@ -31,8 +31,12 @@ class LoginScreen extends StatelessWidget {
     }
     //Get the student id and pass throught the navigator to the next page
     final _currentStudent = getUserByUsernameAndPassword(_username, _password);
-    Navigator.of(context).push(MaterialPageRoute(
-        builder: (ctx) => HomeScreen(currentId: _currentStudent.studentId)));
+    Navigator.of(context).pushAndRemoveUntil(
+      MaterialPageRoute(
+        builder: (ctx) => HomeScreen(currentId: _currentStudent.studentId),
+      ),
+      (route) => false,
+    );
   }
 
   @override

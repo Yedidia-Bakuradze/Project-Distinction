@@ -43,10 +43,11 @@ class SignupScreen extends StatelessWidget {
     print("New Studnet");
 
     //Navigation to the home screen
-    Navigator.of(ctx).push(
+    Navigator.of(ctx).pushAndRemoveUntil(
       MaterialPageRoute(
         builder: (ctx) => HomeScreen(currentId: _newStudent.studentId),
       ),
+      (route) => false,
     );
   }
 

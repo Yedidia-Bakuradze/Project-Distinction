@@ -9,6 +9,7 @@ class Task {
     required this.submittedDocUrl,
     required this.isCompleted,
     required this.publicAccess,
+    this.subTasks = const [],
   }) : taskId = const Uuid().v1();
 
   String title;
@@ -20,5 +21,5 @@ class Task {
   bool isCompleted = false;
   bool publicAccess = false;
 
-  List<Task> subTasks = [];
+  List<Task> subTasks;
 }
