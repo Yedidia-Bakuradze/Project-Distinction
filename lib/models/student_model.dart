@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:project_distinction/models/course_model.dart';
 import 'package:project_distinction/models/major_model.dart';
+import 'package:project_distinction/models/task_model.dart';
 import 'package:uuid/uuid.dart';
 
 class Student {
@@ -9,27 +11,28 @@ class Student {
     required this.firstName,
     required this.lastName,
     required this.emailAddress,
-    required this.schoolName,
+    required this.major,
     this.color = Colors.black,
     this.credits = 0,
-    this.imageUrl = "",
-    this.listOfMajors = const [],
     this.points = 0,
-  }) : studentId = const Uuid().v1();
+    this.enrollingCourses = const [],
+    this.finishedCourses = const [],
+    this.tasks = const [],
+  }) : id = const Uuid().v1();
 
-  String studentId;
+  String id;
   String username;
-  String password;
-
-  String imageUrl = "";
   String firstName;
   String lastName;
-
+  String password;
   String emailAddress;
-  String schoolName;
 
-  int points = 0;
-  double credits = 0.0;
+  int points;
   Color color = Colors.deepPurpleAccent;
-  List<Major> listOfMajors;
+
+  double credits;
+  Major major;
+  List<Task> tasks;
+  List<Course> enrollingCourses;
+  List<Course> finishedCourses;
 }
