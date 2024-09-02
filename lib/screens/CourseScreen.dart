@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:project_distinction/controller/user_controller.dart';
 import 'package:project_distinction/models/course_model.dart';
 import 'package:project_distinction/models/student_model.dart';
-import 'package:project_distinction/widgets/TaskWidget.dart';
 
 class CourseScreen extends StatefulWidget {
   CourseScreen({
@@ -25,14 +23,12 @@ class _CourseScreenState extends State<CourseScreen> {
   @override
   void initState() {
     super.initState();
-    _student = findStudentById(widget.userId);
-    _course = getCourseByStudent(_student.studentId, widget.courseId);
+    _student = Student.getStudentById(widget.userId);
+    _course = _student.getCourseById(widget.courseId);
   }
 
   @override
   Widget build(BuildContext context) {
-    print(_course.courseId);
-    print(_course.courseId);
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         onPressed: _onAddAction,
@@ -50,7 +46,7 @@ class _CourseScreenState extends State<CourseScreen> {
             backgroundColor: _course.color,
             flexibleSpace: FlexibleSpaceBar(
               title: Text(
-                _course.title,
+                _course.name,
                 style: const TextStyle(
                   color: Colors.white,
                 ),

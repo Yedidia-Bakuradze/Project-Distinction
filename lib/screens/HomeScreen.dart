@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:project_distinction/controller/user_controller.dart';
 import 'package:project_distinction/models/course_model.dart';
 import 'package:project_distinction/models/major_model.dart';
 import 'package:project_distinction/models/student_model.dart';
@@ -25,8 +24,8 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
-    _student = findStudentById(widget.currentId);
-    _major = _student.listOfMajors[0];
+    _student = Student.getStudentById(widget.currentId);
+    _major = _student.major;
     _totalListOfCourses = [
       ..._major.optionalCourses,
       ..._major.requiredCourses
@@ -82,9 +81,9 @@ class _HomeScreenState extends State<HomeScreen> {
           children: [
             for (var course in _totalListOfCourses)
               GridItem(
-                currentUserId: _student.studentId,
-                courseId: course.courseId,
-                title: course.title,
+                currentUserId: _student.id,
+                courseId: course.id,
+                title: course.name,
               ),
           ],
         ),

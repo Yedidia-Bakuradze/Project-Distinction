@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:project_distinction/controller/user_controller.dart';
+import 'package:project_distinction/models/student_model.dart';
 import 'package:project_distinction/screens/HomeScreen.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -17,23 +17,22 @@ class LoginScreen extends StatelessWidget {
     }
     _formKey.currentState!.save();
     //Validate the input fields as values in db
-    if (!verifyUserCredetials(_username, _password)) {
-      if (isUserExists(_username)) {
-        //TODO: Invoke a message that says "The password isn't correct"
+    if (!Student.isUserCredentialsValid(_username, _password)) {
+      if (Student.isUserExists(_username)) {
         ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(content: Text("The password isn't correct")));
       } else {
-        //TODO: Invoke a message that says "The user isn't registered in our system"
         ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
             content: Text("The user isn't registered in our system")));
       }
       return;
     }
     //Get the student id and pass throught the navigator to the next page
-    final _currentStudent = getUserByUsernameAndPassword(_username, _password);
+    final _currentStudent =
+        Student.getStudentByCredential(_username, _password);
     Navigator.of(context).pushAndRemoveUntil(
       MaterialPageRoute(
-        builder: (ctx) => HomeScreen(currentId: _currentStudent.studentId),
+        builder: (ctx) => HomeScreen(currentId: _currentStudent.id),
       ),
       (route) => false,
     );

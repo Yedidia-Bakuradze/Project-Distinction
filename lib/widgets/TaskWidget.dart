@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:project_distinction/controller/user_controller.dart';
 import 'package:project_distinction/models/course_model.dart';
 import 'package:project_distinction/models/student_model.dart';
-import 'package:project_distinction/models/task_model.dart';
 
 class TaskWidget extends StatelessWidget {
   const TaskWidget({
@@ -18,8 +16,8 @@ class TaskWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Student _student = findStudentById(uid);
-    Course _course = getCourseByStudent(uid, cid);
+    Student _student = Student.getStudentById(uid);
+    Course _course = _student.getCourseById(cid);
 
     return Card(
       shape: RoundedRectangleBorder(
