@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:project_distinction/screens/CourseScreen.dart';
 
-class GridItem extends StatelessWidget {
-  GridItem({
+class CourseGridItem extends StatelessWidget {
+  CourseGridItem({
     super.key,
     required this.title,
     required this.courseId,

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:project_distinction/models/course_model.dart';
 import 'package:project_distinction/models/major_model.dart';
 import 'package:project_distinction/models/student_model.dart';
-import 'package:project_distinction/widgets/GridItem.dart';
+import 'package:project_distinction/widgets/CourseGridItem.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({
@@ -26,10 +26,7 @@ class _HomeScreenState extends State<HomeScreen> {
     super.initState();
     _student = Student.getStudentById(widget.currentId);
     _major = _student.major;
-    _totalListOfCourses = [
-      ..._major.optionalCourses,
-      ..._major.requiredCourses
-    ];
+    _totalListOfCourses = [..._student.enrollingCourses];
   }
 
   void _onItemTapped(int index) {
@@ -80,7 +77,7 @@ class _HomeScreenState extends State<HomeScreen> {
           // --- Generating the course that user has been taken ---
           children: [
             for (var course in _totalListOfCourses)
-              GridItem(
+              CourseGridItem(
                 currentUserId: _student.id,
                 courseId: course.id,
                 title: course.name,

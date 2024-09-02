@@ -10,5 +10,6 @@ class Exam {
   String title;
   String term;
   String examId;
+  double? greade;
   DateTime? examDate;
 }
