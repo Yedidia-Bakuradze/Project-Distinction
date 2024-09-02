@@ -4,22 +4,24 @@ class Task {
   Task({
     required this.title,
     required this.dueDate,
-    required this.personalStarttDate,
-    required this.personalDuetDate,
-    required this.submittedDocUrl,
-    required this.isCompleted,
-    required this.publicAccess,
+    this.isCompleted = false,
+    this.publicAccess = false,
+    this.docUrl,
+    this.personalStartDate,
+    this.personalDuetDate,
     this.subTasks = const [],
-  }) : taskId = const Uuid().v1();
+  }) : id = const Uuid().v1();
 
+  String id;
   String title;
+
   DateTime? dueDate;
-  DateTime? personalStarttDate;
+  DateTime? personalStartDate;
   DateTime? personalDuetDate;
-  String taskId;
-  String submittedDocUrl;
-  bool isCompleted = false;
-  bool publicAccess = false;
+  String? docUrl;
+
+  bool isCompleted;
+  bool publicAccess;
 
   List<Task> subTasks;
 }
