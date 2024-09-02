@@ -7,9 +7,8 @@ import 'package:uuid/uuid.dart';
 
 class Course {
   Course({
-    required this.title,
+    required this.name,
     required this.credits,
-    required this.totalHourCount,
     required this.examWeight,
     required this.quizWeight,
     required this.assignmentWeight,
@@ -20,26 +19,25 @@ class Course {
     required this.color,
     required this.exams,
     required this.quizzes,
-    this.specialExam,
-  }) : courseId = const Uuid().v1();
+  }) : id = const Uuid().v1();
 
-  String imageUrl;
-  String title;
-  double credits;
-  double totalHourCount;
-  String courseId;
+  String
+      imageUrl; // An image related to this course that would presented as a wallpaper in the course page
+  String name; // The name of the coruse
+  double credits; // How many credits does this course worth
+  String id; // An id assosiacted to an indevidual coruse
+  Color color; // A color assosicated to an indevidual coruse
 
   //Final's weight calculation
   double examWeight;
   double quizWeight;
   double assignmentWeight;
 
+  //The number of quizzes and assignments that would be calculated in the final score
   int numOfCalculatedQuizzes;
   int numOfCalculatedAssignment;
-  String? specialExam;
-  Color color;
 
-  //List of tasks related to the course
+  //List of tasks and quizzes related to the course
   List<Task> tasks;
   List<Quiz> quizzes;
   List<Exam> exams;
