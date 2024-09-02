@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:project_distinction/controller/user_controller.dart';
+import 'package:project_distinction/models/major_model.dart';
 import 'package:project_distinction/models/student_model.dart';
 import 'package:project_distinction/screens/HomeScreen.dart';
 
@@ -29,24 +29,31 @@ class SignupScreen extends StatelessWidget {
 
     //Create a new Student object
     final _newStudent = Student(
-      username: _username,
-      password: _password,
-      firstName: _firstName,
-      lastName: _lastName,
-      emailAddress: _emailAddress,
-      schoolName: _schoolName,
-    );
+        username: _username,
+        password: _password,
+        firstName: _firstName,
+        lastName: _lastName,
+        emailAddress: _emailAddress,
+        major: Major(
+            title: "Computer Science",
+            requiredCredits: 120,
+            type: "BSc",
+            requiredCourses: [],
+            optionalCourses: [],
+            color: Colors.black,
+            imageUrl: ""));
 
-    addStudentToDb(_newStudent);
+    Student.registerStudent(_newStudent);
 
     //Move to the dashboard by passing the id to the next screen
     print("New Studnet");
 
     //Navigation to the home screen
-    Navigator.of(ctx).push(
+    Navigator.of(ctx).pushAndRemoveUntil(
       MaterialPageRoute(
-        builder: (ctx) => HomeScreen(currentId: _newStudent.studentId),
+        builder: (ctx) => HomeScreen(currentId: _newStudent.id),
       ),
+      (route) => false,
     );
   }
 
@@ -152,14 +159,14 @@ class SignupScreen extends StatelessWidget {
                     decoration: const InputDecoration(labelText: "Username"),
 
                     //Validates the username field
-                    validator: (value) {
-                      if (value == null || value.trim().isEmpty) {
+                    validator: (_username) {
+                      if (_username == null || _username.trim().isEmpty) {
                         return "The field cann't be empty";
                       }
-                      if (isUserExists(value)) {
+                      if (Student.isUserExists(_username)) {
                         return "The username is already in our system";
                       }
-                      if (value.trim().length < 6) {
+                      if (_username.trim().length < 6) {
                         return "The username must be at least 6 charaters long";
                       }
                       return null;
