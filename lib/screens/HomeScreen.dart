@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:project_distinction/models/course_model.dart';
-import 'package:project_distinction/models/major_model.dart';
 import 'package:project_distinction/models/student_model.dart';
 import 'package:project_distinction/widgets/CourseGridItem.dart';
 
@@ -17,7 +16,6 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   late Student _student;
-  late Major _major;
   late List<Course> _totalListOfCourses;
   int _selectedIndex = 0;
 
@@ -25,7 +23,6 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     super.initState();
     _student = Student.getStudentById(widget.currentId);
-    _major = _student.major;
     _student.inrollNewCourse(Course.listOfCourses[0]);
     _totalListOfCourses = [..._student.enrollingCourses];
   }
@@ -77,7 +74,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
           // --- Generating the course that user has been taken ---
           children: [
-            for (var course in _totalListOfCourses)
+            for (Course course in _totalListOfCourses)
               CourseGridItem(
                 uid: _student.id,
                 cid: course.id,
