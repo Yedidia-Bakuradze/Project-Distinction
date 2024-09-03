@@ -3,7 +3,7 @@ import 'package:uuid/uuid.dart';
 class Task {
   Task({
     required this.title,
-    required this.dueDate,
+    this.dueDate,
     this.isCompleted = false,
     this.publicAccess = false,
     this.docUrl,

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:project_distinction/models/course_model.dart';
 import 'package:project_distinction/models/student_model.dart';
 import 'package:project_distinction/models/task_model.dart';
+import 'package:project_distinction/screens/NewTaskScreen.dart';
 import 'package:project_distinction/screens/TaskScreen.dart';
 import 'package:project_distinction/widgets/TaskWidget.dart';
 
@@ -22,7 +23,15 @@ class _CourseScreenState extends State<CourseScreen> {
   late final Course _course;
   late final Student _student;
   late List<Task> _tasks;
-  void _onAddAction() {}
+  void _onAddAction() {
+    print("Activacted");
+    showModalBottomSheet(
+      useSafeArea: true,
+      isScrollControlled: true,
+      context: context,
+      builder: (ctx) => NewTaskScreen(course: _course),
+    );
+  }
 
   //Navigates to the sub-task's screen
   void navigatetoSubTask(Task subTask) {
