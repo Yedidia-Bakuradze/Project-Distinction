@@ -1,28 +1,19 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
-import 'package:project_distinction/models/course_model.dart';
 import 'package:project_distinction/models/student_model.dart';
 import 'package:project_distinction/models/task_model.dart';
-import 'package:project_distinction/screens/TaskScreen.dart';
 import 'package:project_distinction/widgets/TaskWidget.dart';
 
-class CourseScreen extends StatefulWidget {
-  CourseScreen({
+class TaskScreen extends StatefulWidget {
+  TaskScreen({
     super.key,
-    required this.uid,
-    required this.cid,
+    required this.task,
   });
-  final String uid;
-  final String cid;
-
+  final Task task;
   @override
-  State<CourseScreen> createState() => _CourseScreenState();
+  State<TaskScreen> createState() => _TaskScreenState();
 }
 
-class _CourseScreenState extends State<CourseScreen> {
-  late final Course _course;
-  late final Student _student;
+class _TaskScreenState extends State<TaskScreen> {
   late List<Task> _tasks;
   void _onAddAction() {}
 
@@ -35,13 +26,9 @@ class _CourseScreenState extends State<CourseScreen> {
   @override
   void initState() {
     super.initState();
-    _student = Student.getStudentById(widget.uid);
-    _course = _student.getCourseById(widget.cid);
     _tasks = [];
-    for (Task task in _student.tasks) {
-      if (_course.tasks.any((t) => t.id == task.id)) {
-        _tasks.add(task);
-      }
+    for (Task task in widget.task.subTasks) {
+      _tasks.add(task);
     }
   }
 
@@ -59,13 +46,13 @@ class _CourseScreenState extends State<CourseScreen> {
             pinned: true,
             toolbarHeight:
                 60.0, // Increased height for the header when scrolled
-            backgroundColor: _course.color,
+            backgroundColor: Colors.amber,
             flexibleSpace: FlexibleSpaceBar(
               title: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Text(
-                    _course.name,
+                    widget.task.title,
                     style: const TextStyle(color: Colors.white),
                   ),
                   Text(
@@ -78,7 +65,8 @@ class _CourseScreenState extends State<CourseScreen> {
                 ],
               ),
               centerTitle: true,
-              background: Image.asset(_course.imageUrl, fit: BoxFit.cover),
+              background: Image.asset("assets/images/calculusII.jpg",
+                  fit: BoxFit.cover),
             ),
           ),
 

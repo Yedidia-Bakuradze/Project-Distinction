@@ -1,12 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:project_distinction/models/task_model.dart';
 
-class TaskWidget extends StatelessWidget {
-  const TaskWidget({
+class TaskWidget extends StatefulWidget {
+  TaskWidget({
     super.key,
     required this.task,
+    required this.action,
   });
   final Task task;
+  void Function(Task) action;
+
+  @override
+  State<TaskWidget> createState() => _TaskWidgetState();
+}
+
+class _TaskWidgetState extends State<TaskWidget> {
+  void _onCompletedTask(value) {
+    setState(() {
+      widget.task.isCompleted = !widget.task.isCompleted;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -18,12 +32,19 @@ class TaskWidget extends StatelessWidget {
         child: Row(
           children: [
             Checkbox(
-              value: task.isCompleted,
-              onChanged: (value) {},
+              value: widget.task.isCompleted,
+              onChanged: _onCompletedTask,
             ),
-            Text(task.title),
-            if (task.subTasks.length != 0)
-              IconButton(onPressed: () {}, icon: const Icon(Icons.arrow_right))
+            Text(widget.task.title),
+            if (widget.task.subTasks.isNotEmpty)
+              IconButton(
+                onPressed: () {
+                  widget.action(widget.task);
+                },
+                icon: const Icon(
+                  Icons.arrow_right,
+                ),
+              )
           ],
         ),
       ),
