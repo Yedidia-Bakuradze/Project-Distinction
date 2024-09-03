@@ -1,7 +1,10 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:project_distinction/models/course_model.dart';
 import 'package:project_distinction/models/student_model.dart';
 import 'package:project_distinction/models/task_model.dart';
+import 'package:project_distinction/widgets/TaskWidget.dart';
 
 class CourseScreen extends StatefulWidget {
   CourseScreen({
@@ -46,19 +49,28 @@ class _CourseScreenState extends State<CourseScreen> {
         slivers: [
           SliverAppBar(
             expandedHeight: 250.0,
-            floating: false,
             pinned: true,
-            centerTitle: true,
             toolbarHeight:
-                80.0, // Increased height for the header when scrolled
+                60.0, // Increased height for the header when scrolled
             backgroundColor: _course.color,
             flexibleSpace: FlexibleSpaceBar(
-              title: Text(
-                _course.name,
-                style: const TextStyle(
-                  color: Colors.white,
-                ),
+              title: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    _course.name,
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  Text(
+                    "${_tasks.length} tasks",
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 12,
+                    ),
+                  )
+                ],
               ),
+              centerTitle: true,
               background: Image.asset(_course.imageUrl, fit: BoxFit.cover),
             ),
           ),
@@ -75,9 +87,9 @@ class _CourseScreenState extends State<CourseScreen> {
             padding: const EdgeInsets.all(5),
             sliver: SliverList(
               delegate: SliverChildBuilderDelegate(
-                (ctx, index) => Text("Task Numebr ${index}"),
+                (ctx, index) => TaskWidget(task: _tasks[index]),
 
-                childCount: _course.tasks.length, // Number of assignments
+                childCount: _tasks.length, // Number of assignments
               ),
             ),
           ),

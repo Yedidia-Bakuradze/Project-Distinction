@@ -1,24 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:project_distinction/models/course_model.dart';
-import 'package:project_distinction/models/student_model.dart';
+import 'package:project_distinction/models/task_model.dart';
 
 class TaskWidget extends StatelessWidget {
   const TaskWidget({
     super.key,
-    required this.uid,
-    required this.cid,
-    required this.tid,
+    required this.task,
   });
-
-  final String uid;
-  final String cid;
-  final String tid;
-
+  final Task task;
   @override
   Widget build(BuildContext context) {
-    Student _student = Student.getStudentById(uid);
-    Course _course = _student.getCourseById(cid);
-
     return Card(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10),
@@ -28,9 +18,12 @@ class TaskWidget extends StatelessWidget {
         child: Row(
           children: [
             Checkbox(
-              value: true,
+              value: task.isCompleted,
               onChanged: (value) {},
             ),
+            Text(task.title),
+            if (task.subTasks.length != 0)
+              IconButton(onPressed: () {}, icon: const Icon(Icons.arrow_right))
           ],
         ),
       ),
