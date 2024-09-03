@@ -5,13 +5,13 @@ class CourseGridItem extends StatelessWidget {
   CourseGridItem({
     super.key,
     required this.title,
-    required this.courseId,
-    required this.currentUserId,
+    required this.cid,
+    required this.uid,
   });
 
-  final String currentUserId;
+  final String uid;
   var title = '';
-  var courseId = '';
+  var cid = '';
   @override
   Widget build(BuildContext context) {
     return InkWell(
@@ -20,8 +20,8 @@ class CourseGridItem extends StatelessWidget {
         Navigator.of(context).push(
           MaterialPageRoute(
             builder: (ctx) => CourseScreen(
-              userId: currentUserId,
-              courseId: courseId,
+              uid: uid,
+              cid: cid,
             ),
           ),
         );
@@ -37,7 +37,7 @@ class CourseGridItem extends StatelessWidget {
           borderRadius: BorderRadius.circular(16),
           gradient: const LinearGradient(
             colors: [
-              Colors.purple,
+              Color.fromARGB(255, 191, 57, 214),
               Colors.deepPurple,
             ],
             begin: Alignment.topLeft,

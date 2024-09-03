@@ -7,6 +7,13 @@ class Quiz {
     this.quizDate,
   }) : quizId = const Uuid().v1();
 
+  Quiz.copy(Quiz _quiz)
+      : title = _quiz.title,
+        quizId = _quiz.quizId,
+        quizNumber = _quiz.quizNumber,
+        grade = _quiz.grade,
+        quizDate = _quiz.quizDate;
+
   String title;
   String quizId;
   int quizNumber;

@@ -18,9 +18,6 @@ class Student {
     this.color = Colors.black,
     this.credits = 0,
     this.points = 0,
-    this.enrollingCourses = const [],
-    this.finishedCourses = const [],
-    this.tasks = const [],
   }) : id = const Uuid().v1();
 
   Student.copy(Student _student)
@@ -36,7 +33,9 @@ class Student {
         major = _student.major,
         tasks = _student.tasks,
         enrollingCourses = [..._student.enrollingCourses],
-        finishedCourses = [..._student.finishedCourses];
+        finishedCourses = [..._student.finishedCourses],
+        exams = [..._student.exams],
+        quizzes = [..._student.quizzes];
   String id;
   String username;
   String firstName;
@@ -49,9 +48,11 @@ class Student {
 
   double credits;
   Major major;
-  List<Task> tasks;
-  List<Course> enrollingCourses;
-  List<Course> finishedCourses;
+  List<Task> tasks = [];
+  List<Course> enrollingCourses = [];
+  List<Course> finishedCourses = [];
+  List<Exam> exams = [];
+  List<Quiz> quizzes = [];
 
   static List<Student> listOfStudents = [
     Student(
@@ -71,144 +72,6 @@ class Student {
       color: Colors.blue,
       credits: 20.0,
       points: 80,
-      enrollingCourses: [
-        Course(
-          name: "Introduction to Programming",
-          credits: 4.0,
-          examWeight: 60.0,
-          quizWeight: 20.0,
-          assignmentWeight: 20.0,
-          numOfCalculatedQuizzes: 2,
-          numOfCalculatedAssignment: 5,
-          tasks: [
-            Task(
-              title: "Homework 1: Basic Syntax",
-              dueDate: DateTime(2024, 9, 30),
-              personalStartDate: DateTime(2024, 9, 15),
-              personalDuetDate: DateTime(2024, 9, 29),
-              subTasks: [
-                Task(
-                  title: "Complete Chapter 1 Exercises",
-                  dueDate: DateTime(2024, 9, 25),
-                  isCompleted: false,
-                ),
-                Task(
-                  title: "Implement Simple Calculator",
-                  dueDate: DateTime(2024, 9, 27),
-                  isCompleted: false,
-                ),
-              ],
-            ),
-            Task(
-              title: "Project: Build a Todo App",
-              dueDate: DateTime(2024, 10, 15),
-              personalStartDate: DateTime(2024, 10, 1),
-              personalDuetDate: DateTime(2024, 10, 14),
-              subTasks: [
-                Task(
-                  title: "Design the UI",
-                  dueDate: DateTime(2024, 10, 5),
-                  isCompleted: false,
-                ),
-                Task(
-                  title: "Implement Backend",
-                  dueDate: DateTime(2024, 10, 10),
-                  isCompleted: false,
-                ),
-                Task(
-                  title: "Testing",
-                  dueDate: DateTime(2024, 10, 12),
-                  isCompleted: false,
-                ),
-              ],
-            ),
-          ],
-          imageUrl: "",
-          color: Colors.green,
-          exams: [
-            Exam(
-              title: "Midterm Exam",
-              term: "Fall 2024",
-              examDate: DateTime(2024, 11, 10),
-            ),
-            Exam(
-              title: "Final Exam",
-              term: "Fall 2024",
-              examDate: DateTime(2024, 12, 15),
-            ),
-          ],
-          quizzes: [
-            Quiz(
-              title: "Quiz 1: Variables and Data Types",
-              quizNumber: 1,
-              quizDate: DateTime(2024, 10, 5),
-            ),
-            Quiz(
-              title: "Quiz 2: Control Structures",
-              quizNumber: 2,
-              quizDate: DateTime(2024, 10, 20),
-            ),
-          ],
-        ),
-        Course(
-          name: "Calculus I",
-          credits: 5.0,
-          examWeight: 70.0,
-          quizWeight: 15.0,
-          assignmentWeight: 15.0,
-          numOfCalculatedQuizzes: 3,
-          numOfCalculatedAssignment: 4,
-          tasks: [],
-          imageUrl: "",
-          color: Colors.orange,
-          exams: [],
-          quizzes: [],
-        ),
-      ],
-      finishedCourses: [],
-      tasks: [
-        Task(
-          title: "Homework 1: Basic Syntax",
-          dueDate: DateTime(2024, 9, 30),
-          personalStartDate: DateTime(2024, 9, 15),
-          personalDuetDate: DateTime(2024, 9, 29),
-          subTasks: [
-            Task(
-              title: "Complete Chapter 1 Exercises",
-              dueDate: DateTime(2024, 9, 25),
-              isCompleted: false,
-            ),
-            Task(
-              title: "Implement Simple Calculator",
-              dueDate: DateTime(2024, 9, 27),
-              isCompleted: false,
-            ),
-          ],
-        ),
-        Task(
-          title: "Project: Build a Todo App",
-          dueDate: DateTime(2024, 10, 15),
-          personalStartDate: DateTime(2024, 10, 1),
-          personalDuetDate: DateTime(2024, 10, 14),
-          subTasks: [
-            Task(
-              title: "Design the UI",
-              dueDate: DateTime(2024, 10, 5),
-              isCompleted: false,
-            ),
-            Task(
-              title: "Implement Backend",
-              dueDate: DateTime(2024, 10, 10),
-              isCompleted: false,
-            ),
-            Task(
-              title: "Testing",
-              dueDate: DateTime(2024, 10, 12),
-              isCompleted: false,
-            ),
-          ],
-        ),
-      ],
     ),
   ];
 
@@ -251,15 +114,90 @@ class Student {
 
   void inrollNewCourse(Course course) {
     // Add all its assignment to the student's personal list of tasks
-
+    for (Task task in course.tasks) {
+      tasks.add(Task.copy(task));
+    }
     // Add all its exams to the student's personal list of exams
-
+    for (Exam exam in course.exams) {
+      exams.add(Exam.copy(exam));
+    }
     // Add all its quizzes to the student's personal list of quizzes
-
-    // Add the course to teh
+    for (Quiz quiz in course.quizzes) {
+      quizzes.add(Quiz.copy(quiz));
+    }
+    // Add the course to the list of courses tha
+    enrollingCourses.add(course);
   }
 
   static registerStudent(Student _student) {
     listOfStudents.add(Student.copy(_student));
   }
 }
+
+List<Exam> exams = [
+  Exam(
+    title: "Midterm Exam",
+    term: "Fall 2024",
+    examDate: DateTime(2024, 11, 10),
+  ),
+  Exam(
+    title: "Final Exam",
+    term: "Fall 2024",
+    examDate: DateTime(2024, 12, 15),
+  ),
+];
+List<Quiz> quizzes = [
+  Quiz(
+    title: "Quiz 1: Variables and Data Types",
+    quizNumber: 1,
+    quizDate: DateTime(2024, 10, 5),
+  ),
+  Quiz(
+    title: "Quiz 2: Control Structures",
+    quizNumber: 2,
+    quizDate: DateTime(2024, 10, 20),
+  ),
+];
+List<Task> tasks = [
+  Task(
+    title: "Homework 1: Basic Syntax",
+    dueDate: DateTime(2024, 9, 30),
+    personalStartDate: DateTime(2024, 9, 15),
+    personalDuetDate: DateTime(2024, 9, 29),
+    subTasks: [
+      Task(
+        title: "Complete Chapter 1 Exercises",
+        dueDate: DateTime(2024, 9, 25),
+        isCompleted: false,
+      ),
+      Task(
+        title: "Implement Simple Calculator",
+        dueDate: DateTime(2024, 9, 27),
+        isCompleted: false,
+      ),
+    ],
+  ),
+  Task(
+    title: "Project: Build a Todo App",
+    dueDate: DateTime(2024, 10, 15),
+    personalStartDate: DateTime(2024, 10, 1),
+    personalDuetDate: DateTime(2024, 10, 14),
+    subTasks: [
+      Task(
+        title: "Design the UI",
+        dueDate: DateTime(2024, 10, 5),
+        isCompleted: false,
+      ),
+      Task(
+        title: "Implement Backend",
+        dueDate: DateTime(2024, 10, 10),
+        isCompleted: false,
+      ),
+      Task(
+        title: "Testing",
+        dueDate: DateTime(2024, 10, 12),
+        isCompleted: false,
+      ),
+    ],
+  ),
+];

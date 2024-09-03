@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:project_distinction/models/course_model.dart';
 import 'package:project_distinction/models/student_model.dart';
+import 'package:project_distinction/models/task_model.dart';
 
 class CourseScreen extends StatefulWidget {
   CourseScreen({
     super.key,
-    required this.userId,
-    required this.courseId,
+    required this.uid,
+    required this.cid,
   });
-  final String userId;
-  final String courseId;
+  final String uid;
+  final String cid;
 
   @override
   State<CourseScreen> createState() => _CourseScreenState();
@@ -18,13 +19,20 @@ class CourseScreen extends StatefulWidget {
 class _CourseScreenState extends State<CourseScreen> {
   late final Course _course;
   late final Student _student;
+  late List<Task> _tasks;
   void _onAddAction() {}
 
   @override
   void initState() {
     super.initState();
-    _student = Student.getStudentById(widget.userId);
-    _course = _student.getCourseById(widget.courseId);
+    _student = Student.getStudentById(widget.uid);
+    _course = _student.getCourseById(widget.cid);
+    _tasks = [];
+    for (Task task in _student.tasks) {
+      if (_course.tasks.any((t) => t.id == task.id)) {
+        _tasks.add(task);
+      }
+    }
   }
 
   @override

@@ -26,6 +26,7 @@ class _HomeScreenState extends State<HomeScreen> {
     super.initState();
     _student = Student.getStudentById(widget.currentId);
     _major = _student.major;
+    _student.inrollNewCourse(Course.listOfCourses[0]);
     _totalListOfCourses = [..._student.enrollingCourses];
   }
 
@@ -78,8 +79,8 @@ class _HomeScreenState extends State<HomeScreen> {
           children: [
             for (var course in _totalListOfCourses)
               CourseGridItem(
-                currentUserId: _student.id,
-                courseId: course.id,
+                uid: _student.id,
+                cid: course.id,
                 title: course.name,
               ),
           ],
